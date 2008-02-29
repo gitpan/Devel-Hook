@@ -1,0 +1,162 @@
+NAME
+    Devel::Hook - Mess around with BEGIN/CHECK/INIT/END blocks
+
+SYNOPSIS
+      use Devel::Hook ();
+
+      INIT {
+        print "INIT #2\n";
+      }
+
+      BEGIN {
+        Devel::Hook->push_INIT_hook( sub { print "INIT #3 (hook)\n" } );
+        Devel::Hook->unshift_INIT_hook( sub { print "INIT #1 (hook)\n" } );
+      }
+
+      print "RUNTIME\n";
+
+    Output will be:
+
+      INIT #1 (hook)
+      INIT #2
+      INIT #3 (hook)
+      RUNTIME
+
+DESCRIPTION
+    Perl keeps arrays of subroutines that are executed at the beginning and
+    at the end of a running Perl program and its program units. These
+    subroutines correspond to the special code blocks: `BEGIN', `UNITCHECK',
+    `CHECK', `INIT' and `END'. (See details at perlmod.) This module
+    provides limited capabilities to manipulate these arrays.
+
+    Such arrays belong to Perl's internals that you're not supposed to see.
+    Entries in these arrays get consumed by the interpreter as it enters
+    distinct compilation phases, triggered by statements like `require',
+    `use', `do', `eval', etc. To play as safest as possible, the only
+    allowed operations are to add entries to the start and to the end of
+    these arrays.
+
+      # add code hooks to the start of <BLOCK> array
+      Devel::Hook->unshift_<BLOCK>_hook( @blocks );
+
+      # add code hooks to the end of <BLOCK> array
+      Devel::Hook->push_<BLOCK>_hook( @blocks );
+
+    where <BLOCK> is one of: `BEGIN', `UNITCHECK', `CHECK', `INIT' or `END'.
+
+    If the hooks are going to run first or last according to the end of the
+    array where they were inserted, it depends on the nature of the involved
+    special <BLOCK>: FIFO (first-in, first-out) for BEGIN, UNITCHECK and
+    INIT, but LIFO (last-in, first-out) for CHECK and END blocks.
+
+    If you are curious about the content of these arrays, read more at
+    Manip::END and proceed to the innards of Perl.
+
+  WHAT IS IT GOOD FOR
+
+    If you want to inject code into Perl compilation phases or at the end of
+    the program, this module may be useful.
+
+    If it can be done with literal `BEGIN/UNITCHECK/CHECK/INIT/END' blocks,
+    it should be. For weirder things, maybe `Devel::Hook' can solve it.
+
+    As an example of application, Devel::Sub::Trace uses this module to
+    insert a `INIT' hook which will run just before any other runtime code
+    in the caller's package, wrapping subs after they were
+    compiled/generated but before they get called by runtime code.
+
+  HOW TO USE IT
+
+      (not yet finished)
+
+    With care. We are in the terrain of Perl internals we are not supposed
+    to mess with. And furthermore, if you don't understand the implications
+    of what you are doing with this module, it is likely not to do what you
+    want.
+
+      (to be finished)
+
+METHODS
+    * unshift_BEGIN_hook
+    * push_BEGIN_hook
+          Devel::Hook->unshift_BEGIN_hook( @blocks );
+          Devel::Hook->push_BEGIN_hook( @blocks );
+
+        This will add the blocks to the start (`unshift_BEGIN_hook') and to
+        the end (`push_BEGIN_hook') of the array of BEGIN hooks.
+
+        `@blocks' is an array of subroutine references.
+
+    * unshift_CHECK_hook
+    * push_CHECK_hook
+          Devel::Hook->unshift_CHECK_hook( @blocks );
+          Devel::Hook->push_CHECK_hook( @blocks );
+
+        This will add the blocks to the start (`unshift_CHECK_hook') and to
+        the end (`push_CHECK_hook') of the array of CHECK hooks.
+
+        `@blocks' is an array of subroutine references.
+
+    * unshift_INIT_hook
+    * push_INIT_hook
+          Devel::Hook->unshift_INIT_hook( @blocks );
+          Devel::Hook->push_INIT_hook( @blocks );
+
+        This will add the blocks to the start (`unshift_INIT_hook') and to
+        the end (`push_INIT_hook') of the array of INIT hooks.
+
+        `@blocks' is an array of subroutine references.
+
+    * unshift_END_hook
+    * push_END_hook
+          Devel::Hook->unshift_END_hook( @blocks );
+          Devel::Hook->push_END_hook( @blocks );
+
+        This will add the blocks to the start (`unshift_END_hook') and to
+        the end (`push_END_hook') of the array of END hooks.
+
+        For END hooks, by adding to the start of the array (unshift), they
+        will be the first code blocks executed by Perl when it is exiting.
+
+        For END hooks, by adding to the end of the array (push), they will
+        be the last code blocks executed by Perl when it is exiting.
+
+        `@blocks' is an array of subroutine references.
+
+SEE ALSO
+    perlmod
+
+    Manip::END
+
+BUGS
+    Please report bugs via CPAN RT
+    http://rt.cpan.org/NoAuth/Bugs.html?Dist=Devel-Hook or mailto:
+
+TODO
+    *   support UNITCHECK blocks
+
+    *   learn how to use PPPort for maximum portability
+
+    *   better name for module? Devel::Hooks::Compile, Devel::Hooks::Block,
+        Devel::HOOKS, what?
+
+    *   method names: push_BEGIN_hook or push_BEGIN_hooks?
+
+ACKNOWLEDGEMENTS
+    Everything I needed to learn about XS to write this module was borrowed
+    from Manip::END written by Fergal Daly. To be really honest, the code
+    was all there and I pruned it to a safer/limited/smaller API and
+    included the manipulation to other hooks besides END blocks. And I also
+    plagiarized his documentation.
+
+AUTHOR
+    Fergal Daly (for the code in Manip::END)
+
+    Adriano R. Ferreira, <ferreira@cpan.org>
+
+COPYRIGHT AND LICENSE
+    Copyright (C) 2008 by Adriano R. Ferreira
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
