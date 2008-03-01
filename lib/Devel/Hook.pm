@@ -4,7 +4,7 @@ package Devel::Hook;
 use strict;
 use warnings;
 
-our $VERSION = '0.001';
+$Devel::Hook::VERSION = '0.002';
 
 require XSLoader;
 XSLoader::load( 'Devel::Hook', $Devel::Hook::VERSION );

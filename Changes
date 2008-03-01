@@ -1,5 +1,12 @@
 Revision history for Devel-Hook.
 
+0.002   Sat Mar  1 2008
+        - fixed mistake and omissions in Makefile.PL
+        - no 'our' for 5.005's sake
+        - require warnings::compat (if < 5.006)
+        - POD and POD coverage tests
+        - (will it be enough to build/test/install in 5.005?)
+
 0.001   Fri Feb 29 2008
         - first working and half-documented version
 
