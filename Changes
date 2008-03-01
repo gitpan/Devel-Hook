@@ -1,5 +1,12 @@
 Revision history for Devel-Hook.
 
+0.003   Sat Mar  1 2008
+        - enable prototypes in Hook.xs
+        - it is useless to try to support 5.005
+          (big API changed introduced by 5.006 seems
+          to have changed a lot of things)
+        - perl minimum version is 5.006
+
 0.002   Sat Mar  1 2008
         - fixed mistake and omissions in Makefile.PL
         - no 'our' for 5.005's sake

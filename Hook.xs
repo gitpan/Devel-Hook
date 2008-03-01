@@ -3,7 +3,6 @@
 #include "perl.h"
 #include "XSUB.h"
 
-#include "ppport.h"
 #include "perlapi.h"
 
 AV   *_get_begin_array();
@@ -43,6 +42,8 @@ AV *_get_end_array() {
 }
 
 MODULE = Devel::Hook		PACKAGE = Devel::Hook
+
+PROTOTYPES: ENABLE
 
 AV*
 _get_begin_array()

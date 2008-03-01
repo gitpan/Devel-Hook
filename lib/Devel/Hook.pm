@@ -1,10 +1,11 @@
 
 package Devel::Hook;
 
+use 5.006;
 use strict;
 use warnings;
 
-$Devel::Hook::VERSION = '0.002';
+our $VERSION = '0.003';
 
 require XSLoader;
 XSLoader::load( 'Devel::Hook', $Devel::Hook::VERSION );
@@ -70,5 +71,3 @@ sub _check {
 
 
 1;
-
-
