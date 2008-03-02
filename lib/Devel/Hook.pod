@@ -64,7 +64,7 @@ for CHECK and END blocks.
 
 If you are curious about the content of these arrays, 
 read more at L<Manip::END/WARNING> and proceed
-to the innards of Perl.
+to L<the innards of Perl|perlhack>.
 
 =head2 WHAT IS IT GOOD FOR
 
@@ -110,6 +110,23 @@ and to the end (C<push_BEGIN_hook>) of the array of BEGIN
 hooks.
 
 C<@blocks> is an array of subroutine references. 
+
+
+=item * B< unshift_UNITCHECK_hook >
+
+=item * B< push_UNITCHECK_hook >
+
+  Devel::Hook->unshift_UNITCHECK_hook( @blocks );
+  Devel::Hook->push_UNITCHECK_hook( @blocks );
+
+This will add the blocks to the start (C<unshift_UNITCHECK_hook>)
+and to the end (C<push_UNITCHECK_hook>) of the array of UNITCHECK
+hooks.
+
+C<@blocks> is an array of subroutine references. 
+
+The first stable release with C<UNITCHECK> was 5.10.0.
+For earlier releases, these methods die.
 
 
 =item * B< unshift_CHECK_hook >
@@ -179,14 +196,6 @@ or L<mailto://bugs-Devel-Hook@rt.cpan.org>
 
 =item *
 
-support UNITCHECK blocks
-
-=item *
-
-learn how to use PPPort for maximum portability
-
-=item *
-
 finish docs
 
 =item *
@@ -195,12 +204,11 @@ finish tests
 
 =item *
 
-better name for module? Devel::Hooks::Compile,
-Devel::Hooks::Block, Devel::HOOKS, what?
+B<this module will be soon renamed into C<Devel::Hooks::BLOCK>>
 
 =item *
 
-method names: push_BEGIN_hook or push_BEGIN_hooks?
+test support for UNITCHECK blocks (needs Perl 5.10.0+)
 
 =back
 

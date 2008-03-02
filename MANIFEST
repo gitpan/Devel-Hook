@@ -7,12 +7,13 @@ Changes
 lib/Devel/Hook.pm
 lib/Devel/Hook.pod
 Hook.xs
-ppport.h
+#ppport.h
 
 eg/synopsis.pl
 
 t/01use.t
 t/02basic.t
+t/10error.t
 t/98pod-coverage.t
 t/99pod.t
 META.yml                                 Module meta-data (added by MakeMaker)

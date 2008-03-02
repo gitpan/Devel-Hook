@@ -87,6 +87,19 @@ METHODS
 
         `@blocks' is an array of subroutine references.
 
+    * unshift_UNITCHECK_hook
+    * push_UNITCHECK_hook
+          Devel::Hook->unshift_UNITCHECK_hook( @blocks );
+          Devel::Hook->push_UNITCHECK_hook( @blocks );
+
+        This will add the blocks to the start (`unshift_UNITCHECK_hook') and
+        to the end (`push_UNITCHECK_hook') of the array of UNITCHECK hooks.
+
+        `@blocks' is an array of subroutine references.
+
+        The first stable release with `UNITCHECK' was 5.10.0. For earlier
+        releases, these methods die.
+
     * unshift_CHECK_hook
     * push_CHECK_hook
           Devel::Hook->unshift_CHECK_hook( @blocks );
@@ -133,14 +146,13 @@ BUGS
     http://rt.cpan.org/NoAuth/Bugs.html?Dist=Devel-Hook or mailto:
 
 TODO
-    *   support UNITCHECK blocks
+    *   finish docs
 
-    *   learn how to use PPPort for maximum portability
+    *   finish tests
 
-    *   better name for module? Devel::Hooks::Compile, Devel::Hooks::Block,
-        Devel::HOOKS, what?
+    *   this module will be soon renamed into `Devel::Hooks::BLOCK'
 
-    *   method names: push_BEGIN_hook or push_BEGIN_hooks?
+    *   test support for UNITCHECK blocks (needs Perl 5.10.0+)
 
 ACKNOWLEDGEMENTS
     Everything I needed to learn about XS to write this module was borrowed

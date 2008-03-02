@@ -1,5 +1,12 @@
 Revision history for Devel-Hook.
 
+0.004   Sun Mar  2 2008
+        - support manipulating array of UNITCHECK blocks
+          (for Perls that have it)
+        - new test for bad block arguments
+        - no actual need for ppport.h (considering API
+          for 5.006+ Perls)
+
 0.003   Sat Mar  1 2008
         - enable prototypes in Hook.xs
         - it is useless to try to support 5.005
