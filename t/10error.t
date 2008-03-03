@@ -13,10 +13,10 @@ SKIP: {
     skip 'UNITCHECK not supported', 2 unless Devel::Hook->_has_support_for( 'UNITCHECK' );
 
     eval { Devel::Hook->push_UNITCHECK_hook( 1 ) };
-    like( $@, qr/\UNITCHECK blocks must be CODE references/, 'bad UNITCHECK blocks cause errors' );
+    like( $@, qr/\AUNITCHECK blocks must be CODE references/, 'bad UNITCHECK blocks cause errors' );
 
     eval { Devel::Hook->unshift_UNITCHECK_hook( sub {}, \*STDOUT ) };
-    like( $@, qr/\UNITCHECK blocks must be CODE references/, 'bad UNITCHECK blocks cause errors' );
+    like( $@, qr/\AUNITCHECK blocks must be CODE references/, 'bad UNITCHECK blocks cause errors' );
 
 }
 

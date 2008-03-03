@@ -11,8 +11,10 @@ Hook.xs
 
 eg/synopsis.pl
 
+t/00blocks.t
 t/01use.t
 t/02basic.t
+t/09order.t
 t/10error.t
 t/98pod-coverage.t
 t/99pod.t

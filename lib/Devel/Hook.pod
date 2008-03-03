@@ -54,13 +54,20 @@ the end of these arrays.
 where E<lt>BLOCKE<gt> is one of: C<BEGIN>,
 C<UNITCHECK>, C<CHECK>, C<INIT> or C<END>.
 
-If the hooks are going to run first or last
-according to the end of the array where they
-were inserted, it depends on the nature
-of the involved special E<lt>BLOCKE<gt>:
-FIFO (first-in, first-out) for BEGIN, UNITCHECK
-and INIT, but LIFO (last-in, first-out) 
-for CHECK and END blocks.
+The hooks execute first if they are at the start
+of the array and last if they are at the end.
+Notice that the FIFO or LIFO nature of blocks
+according to their textual order of appearance
+at Perl source does not matter here.
+For example, BEGIN, UNITCHECK and INIT are
+FIFO (first-in, first-out) blocks while
+CHECK and END are LIFO (last-in, first-out).
+But the Perl interpreter and the user of this
+module inserts blocks at the start of arrays
+if they should execute earlier and at the end
+if they are to be executed later,
+with a homogeneous treatment with respect to
+the block arrays.
 
 If you are curious about the content of these arrays, 
 read more at L<Manip::END/WARNING> and proceed

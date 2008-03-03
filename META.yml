@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Devel-Hook
-version:             0.004
+version:             0.005
 abstract:            Mess around with BEGIN/CHECK/INIT/END blocks
 license:             perl
 author:              

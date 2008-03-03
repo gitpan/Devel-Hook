@@ -1,5 +1,19 @@
 Revision history for Devel-Hook.
 
+0.005   Fri Mar  3 2008
+        - fixed silly mistake in regex at t/10error.t
+        - corrected the docs about the direct relationship
+          of order in the array of blocks versus the
+          execution order
+        - added a test to verify the straighforward
+          relation between array order and execution
+          order of blocks
+        - I discovered that in XS code testing for 
+          PL_unitcheckav (with #ifdef) did not work as 
+          intented - now trying with KEY_UNITCHECK
+        - added an exploratory test for Perl semantics
+          of special code blocks
+
 0.004   Sun Mar  2 2008
         - support manipulating array of UNITCHECK blocks
           (for Perls that have it)

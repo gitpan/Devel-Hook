@@ -3,7 +3,7 @@
 #include "perl.h"
 #include "XSUB.h"
 
-#include "perlapi.h"
+#include "keywords.h"
 
 AV   *_get_begin_array();
 AV   *_get_unitcheck_array();
@@ -19,7 +19,7 @@ AV *_get_begin_array() {
 }
 
 AV *_get_unitcheck_array() {
-#ifdef PL_unitcheckav
+#ifdef KEY_UNITCHECK
     if ( !PL_unitcheckav ) {
         PL_unitcheckav = newAV();
     }
@@ -53,7 +53,7 @@ AV *_get_end_array() {
 HV *_get_supported_types() {
     HV *hv = newHV();
     hv_store( hv, "BEGIN", 5, &PL_sv_yes, 0 );
-#ifdef PL_unitcheckav
+#ifdef KEY_UNITCHECK
     hv_store( hv, "UNITCHECK", 9, &PL_sv_yes, 0 );
 #else
     hv_store( hv, "UNITCHECK", 9, &PL_sv_no, 0 );
@@ -85,3 +85,4 @@ _get_end_array()
 
 HV *
 _get_supported_types()
+
